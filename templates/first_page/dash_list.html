@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ASOSIY SAHIFA{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dash_list.css' %}">
+{% include "kirill.html" %}
+
+
+<a href="{% url 'jurnal_app:dash_create' %}" class="add-dash-btn">+</a>
+
+<!-- Modal -->
+<div id="add-dash-modal" class="add-dash-modal">
+    <div class="add-dash-modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Yangi Dash qo'shish</h2>
+        <form method="POST" id="dash-form" enctype="multipart/form-data" action="{% url 'jurnal_app:dash_create' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-comment-btn">Saqlash</button>
+        </form>
+    </div>
+</div>
+
+<div class="dash-list-container">
+    {% for d in dash %}
+        <div class="dash-item">
+            {% if d.image %}
+                <div class="dash-image-container">
+                    <img src="{{ d.image.url }}" alt="{{ d.title }}" class="dash-image">
+                </div>
+            {% endif %}
+            <h2 class="dash-title">{{ d.title }}</h2>
+            <p class="dash-author">Author: {{ d.author }}</p>
+            <p class="dash-published">Published: {{ d.published_date }}</p>
+            <a href="{{ d.get_absolute_url }}" class="dash-details-link">Batafsil</a>
+        </div>
+    {% empty %}
+        <p class="no-dash-message">No dashs available.</p>
+    {% endfor %}
+</div>
+
+<!-- Modal JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('add-dash-modal');
+    const btn = document.getElementById('add-dash-btn');
+    const span = document.querySelector('.close-modal');
+
+    btn.onclick = () => modal.style.display = "block";
+    span.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => { if(event.target == modal) modal.style.display = "none"; }
+});
+</script>
+
+{% endblock %}

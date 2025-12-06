@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Yangi Dash qo'shish{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/add_btn.css' %}">
+{% include "kirill.html" %}
+<div class="dash-create-container">
+    <h2>Yangi maqola qo'shish</h2>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'jurnal_app:maqola_create' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-comment-btn">Saqlash</button>
+    </form>
+
+    <a href="{% url 'jurnal_app:maqola_list' %}" class="back-btn">Orqaga</a>
+</div>
+
+<style>
+.dash-create-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #000b3d;
+    color: #fff;
+    border-radius: 12px;
+}
+
+.dash-create-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dash-create-container form input,
+.dash-create-container form textarea,
+.dash-create-container form select,
+.dash-create-container form input[type="file"] {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #11184d;
+    color: #fff;
+    cursor: pointer;
+}
+
+.submit-comment-btn {
+    width: 100%;
+    padding: 10px;
+    background: #222;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.submit-comment-btn:hover {
+    background: #333;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #ffd591;
+    font-weight: 600;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+    <!-- kirill_full.html -->
+    <style>
+    /* Burchakdagi Kirill tugma */
+    .kirill-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #000b3d;
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        z-index: 9999;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        transition: 0.25s;
+    }
+
+    .kirill-btn:hover {
+        background-color: #11184d;
+        transform: translateY(-2px);
+    }
+    </style>
+
+    <button id="convert-btn" class="kirill-btn">Kirillchaga o'tish</button>
+
+    <script>
+    let isCyrillic = false;
+
+    const latinToCyrillicMap = {
+        'sh':'ш', 'ch':'ч', 'o‘':'ў', 'g‘':'ғ',
+        'a':'а','b':'б','d':'д','e':'е','f':'ф','g':'г','h':'х','i':'и','j':'ж',
+        'k':'к','l':'л','m':'м','n':'н','o':'о','p':'п','q':'қ','r':'р','s':'с',
+        't':'т','u':'у','v':'в','x':'х','y':'й','z':'з'
+    };
+
+    function toCyrillic(text) {
+        let result = text;
+
+        ['sh','ch','o‘','g‘'].forEach(key => {
+            let regex = new RegExp(key, 'gi');
+            result = result.replace(regex, function(matched){
+                return matched === matched.toUpperCase() ? latinToCyrillicMap[key].toUpperCase() : latinToCyrillicMap[key];
+            });
+        });
+
+        for (let key in latinToCyrillicMap) {
+            if (['sh','ch','o‘','g‘'].includes(key)) continue;
+            let regex = new RegExp(key, 'gi');
+            result = result.replace(regex, function(matched){
+                return matched === matched.toUpperCase() ? latinToCyrillicMap[key].toUpperCase() : latinToCyrillicMap[key];
+            });
+        }
+
+        return result;
+    }
+
+function convertNode(node, toCyr) {
+    // ELEMENT NODE bo'lsa tag nomini tekshir
+    if (node.nodeType === Node.ELEMENT_NODE) {
+        const tag = node.tagName.toLowerCase();
+        if (['button', 'script', 'style'].includes(tag)) return; // bunlarni o'tkazib yubor
+    }
+
+    node.childNodes.forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+            if (toCyr) child.textContent = toCyrillic(child.textContent);
+        } else {
+            convertNode(child, toCyr);
+        }
+    });
+}
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('convert-btn');
+        btn.addEventListener('click', () => {
+            if (!isCyrillic) {
+                convertNode(document.body, true);
+                btn.textContent = "Lotinchaga o'tish";
+                isCyrillic = true;
+            } else {
+                location.reload();
+            }
+        });
+    });
+    </script>

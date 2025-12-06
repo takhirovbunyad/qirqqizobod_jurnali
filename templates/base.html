@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+
+
+<!-- HAMBURGER -->
+<div class="hamburger" onclick="toggleSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar-container">
+    <aside class="sidebar">
+        <h2 class="sidebar-heading">MENYU</h2>
+
+        <ul class="sidebar-nav">
+            <li class="nav-item">
+                <a href="{% url 'jurnal_app:dash_list' %}" class="nav-link">
+                    <img src="https://www.svgrepo.com/show/524644/home-angle.svg" class="nav-icon">
+                    <span class="nav-text">ASOSIY</span>
+                </a>
+                <a href="{% url 'jurnal_app:maqola_list' %}" class="nav-link">
+                    <img src="https://www.svgrepo.com/show/432402/article.svg" class="nav-icon">
+                    <span class="nav-text">MAQOLALAR</span>
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+</div>
+
+<!-- MAIN CONTENT (shu yo‘q edi!) -->
+<div class="main-content">
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+function toggleSidebar() {
+    document.querySelector(".sidebar-container").classList.toggle("expanded");
+    document.querySelector(".main-content").classList.toggle("shifted");
+
+    document.querySelector('.hamburger').classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

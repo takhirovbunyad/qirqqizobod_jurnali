@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ maqola.title }}{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/maqola_detail.css' %}">
+{% include 'kirill.html' %}
+
+<div class="maqola-detail-container">
+
+    <div class="maqola-main">
+        {% if maqola.image %}
+        <div class="maqola-image">
+            <img src="{{ maqola.image.url }}" alt="{{ maqola.title }}">
+        </div>
+        {% endif %}
+
+        <div class="maqola-info">
+            <h1 class="maqola-title">{{ maqola.title }}</h1>
+            <p class="maqola-author"><strong>Muallif:</strong> {{ maqola.author }}</p>
+            <p class="maqola-published"><strong>Elon qilingan:</strong> {{ maqola.publish|date:"d M Y H:i" }}</p>
+            {% if maqola.contact %}
+            <p class="maqola-contact"><strong>Aloqa:</strong> {{ maqola.contact }}</p>
+            {% endif %}
+
+            <div class="maqola-content">
+                {{ maqola.content|linebreaks }}
+            </div>
+
+            <div class="maqola-buttons">
+                {% if maqola.file or maqola.image %}
+                    <button class="open-full-btn">Toliq ochish</button>
+                {% endif %}
+                <button class="share-btn" onclick="shareMaqola()">Ulashish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faylni ko‘rsatish (PDF / boshqa fayl) -->
+    {% if maqola.file %}
+    <div class="maqola-file">
+        {% if file_type == 'pdf' %}
+            <iframe src="{{ maqola.file.url }}" width="100%" height="600px"></iframe>
+        {% else %}
+            <p>Faylni <a href="{{ maqola.file.url }}" target="_blank">yuklab olish</a> mumkin</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Kommentlar -->
+    <div class="comments-section" id="comments-section">
+        <h2>Kommentlar</h2>
+        {% for comment in comments %}
+            <div class="comment-item">
+                <p class="comment-name"><strong>{{ comment.name }}</strong> <span class="comment-date">({{ comment.created|date:"d M Y H:i" }})</span></p>
+                <p class="comment-body">{{ comment.body|linebreaks }}</p>
+            </div>
+        {% empty %}
+            <p>Hech qanday komment mavjud emas.</p>
+        {% endfor %}
+
+        <!-- Pagination -->
+        <div class="comments-pagination">
+            {% if comments.has_previous %}
+                <a href="?page={{ comments.previous_page_number }}" class="page-btn">← Oldingi</a>
+            {% endif %}
+            {% if comments.has_next %}
+                <a href="?page={{ comments.next_page_number }}" class="page-btn">Keyingi →</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Komment yozish formasi -->
+    <div class="comment-form-container">
+        <h3>Komment yozish</h3>
+        <form method="post" id="comment-form">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="submit-comment-btn">Yuborish</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Toliq ochish tugmasi
+    const openBtn = document.querySelector(".open-full-btn");
+    const fileIframe = document.querySelector(".maqola-file iframe");
+    const fileLink = document.querySelector(".maqola-file a");
+    if (openBtn) {
+        openBtn.addEventListener("click", () => {
+            let fileUrl = fileIframe?.src || fileLink?.href || "{{ maqola.image.url }}";
+            if (fileUrl) {
+                window.open(fileUrl, "_blank", "width=900,height=700,resizable=yes,scrollbars=yes");
+            }
+        });
+    }
+
+    // Ulashish
+    window.shareMaqola = function() {
+        const url = window.location.href;
+        if (navigator.share) {
+            navigator.share({title: document.title, text: 'Ushbu maqolani ko‘ring:', url: url})
+                .then(() => console.log('Maqola ulashildi'))
+                .catch(err => console.error('Xatolik:', err));
+        } else {
+            prompt('Ushbu linkni nusxalab ulashing:', url);
+        }
+    }
+
+    // Kommentlar pastga scroll qilish
+    const commentsSection = document.getElementById('comments-section');
+    if (commentsSection) commentsSection.scrollTop = commentsSection.scrollHeight;
+
+    // Form submitdan keyin scroll
+    const commentForm = document.getElementById('comment-form');
+    if (commentForm) {
+        commentForm.addEventListener('submit', () => {
+            setTimeout(() => {
+                if (commentsSection) commentsSection.scrollTop = commentsSection.scrollHeight;
+            }, 100);
+        });
+    }
+});
+</script>
+
+{% endblock %}

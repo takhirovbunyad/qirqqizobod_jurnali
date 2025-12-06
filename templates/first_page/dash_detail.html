@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ dash.title }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dash_detail.css' %}">
+{% include "kirill.html" %}
+<div class="dash-detail-container">
+ <div class="dash-detail-image-container">
+    {% if dash.image %}
+        <img src="{{ dash.image.url }}" alt="{{ dash.title }}" class="dash-detail-image">
+    {% endif %}
+
+    <a href="{% url 'jurnal_app:dash_list' %}" class="back-btn">← Orqaga</a>
+ </div>
+
+
+    <div class="dash-detail-main">
+        <h1 class="dash-detail-title">{{ dash.title }}</h1>
+        <p class="dash-detail-author">Author: {{ dash.author }}</p>
+        <p class="dash_detail-author">Contact: {{ dash.contact }}</p>
+        <p class="dash-detail-published">Published: {{ dash.publish }}</p>
+
+        <div class="dash-detail-content">
+            {{ dash.content|linebreaks }}
+        </div>
+
+        <!-- Komment yozish tugmasi -->
+        <button class="comment-btn" onclick="document.querySelector('.comment-form-container').classList.toggle('active')">
+            Komment yozish
+        </button>
+
+        <!-- Komment formasi -->
+        <div class="comment-form-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="submit-comment-btn">Yuborish</button>
+            </form>
+        </div>
+
+        <!-- Kommentlar -->
+        <div class="comments-section">
+            {% for comment in comments %}
+                <div class="comment-item">
+                    <span class="comment-name">{{ comment.name }}</span>
+                    <p class="comment-body">{{ comment.body|linebreaks }}</p>
+                </div>
+            {% empty %}
+                <p class="no-comments">Hech qanday komment mavjud emas.</p>
+            {% endfor %}
+
+        </div>
+
+        <!-- Pagination -->
+<!-- Pagination -->
+<div class="comments-pagination">
+    {% if comments.has_previous %}
+        <a href="?page={{ comments.previous_page_number }}" class="submit-comment-btn">Previous</a>
+    {% endif %}
+
+    {% if comments.has_next %}
+        <a href="?page={{ comments.next_page_number }}" class="submit-comment-btn">Next</a>
+    {% endif %}
+</div>
+
+    </div>
+</div>
+
+
+
+<script>
+document.getElementById('comment-btn').addEventListener('click', function() {
+    const form = document.getElementById('comment-form-container');
+    form.classList.toggle('active');
+});
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Maqolalar{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/maqolalist.css' %}">
+{% include "kirill.html" %}
+
+<a href="{% url 'jurnal_app:maqola_create' %}" class="add-maqola-btn">+</a>
+
+
+    <div class="maqola-list-container">
+        {% for m in maqola %}
+        <div class="maqola-item">
+            {% if m.image %}
+               <div class="maqola-image-container">
+                   <img src="{{ m.image.url }}" alt="{{ m.title }}" class="maqola-image">
+               </div>
+            {% endif %}
+
+            <h2 class="maqola-title">{{ m.title }}</h2>
+            <p class="maqola-author">Muallif: {{ m.author }}</p>
+            <p class="maqola-published">E’lon qilingan: {{ m.publish|date:"d M Y H:i" }}</p>
+            {% if m.contact %}
+                <p class="maqola-contact">Aloqa: {{ m.contact }}</p>
+            {% endif %}
+
+            <p class="maqola-content">{{ m.content|truncatewords:25 }}</p>
+            <a href="{{ m.get_absolute_url }}" class="maqola-details-link">Batafsil</a>
+        </div>
+    {% empty %}
+        <p class="no-maqola-message">Hech qanday maqola mavjud emas.</p>
+    {% endfor %}
+</div>
+<div class="pagination">
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Oldingi</a>
+        {% endif %}
+
+        <span> {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Keyingi</a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<!-- Modal JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('add-maqola-modal');
+    const btn = document.querySelector('.add-maqola-btn');
+    const span = document.querySelector('.close-modal');
+
+    btn.onclick = () => modal.style.display = "block";
+    span.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => { if(event.target == modal) modal.style.display = "none"; }
+});
+</script>
+
+{% endblock %}

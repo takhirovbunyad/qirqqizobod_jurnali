@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="uz">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+    <div class="container" id="landing-text">
+        <h1>QIRQQIZOBOD JURNALI</h1>
+        <p>Ijodiy Loyihangizni boshlang! Gazeta, maqola, sher va rasm - barchasi bir joyda. Sizning ijodingizni keng auditoriyaga yetkazamiz.</p>
+        <a href="{% url 'jurnal_app:dash_list' %}" class="btn">Saytga o‘tish</a>
+    </div>
+
+    <!-- Burchakdagi tugma -->
+    <button id="convert-btn" class="corner-btn">Kirillchaga o‘tish</button>
+
+    <script src="{% static 'js/kirill.js' %}"></script>
+</body>
+</html>
