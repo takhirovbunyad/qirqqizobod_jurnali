@@ -1,0 +1,261 @@
+/* ================================
+   PAGE BACKGROUND
+================================ */
+body {
+    background: #fcf7eb;  /* very dark page background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    color: #fff;
+}
+
+/* ================================
+   DASH LIST — GRID LAYOUT
+================================ */
+.dash-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ================================
+   DASH CARD
+================================ */
+.dash-item {
+    background: #0a1a4d; /* card color */
+    color: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    transition: 0.25s ease;
+    border: 1px solid #11184d;
+}
+
+.dash-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+}
+
+/* ================================
+   DASH CARD IMAGE
+================================ */
+.dash-image-container {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.dash-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.dash-image-container:hover .dash-image {
+    transform: scale(1.05);
+}
+
+/* ================================
+   TEXT STYLES
+================================ */
+.dash-title {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.dash-author,
+.dash-published {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* ================================
+   LINK BUTTON
+================================ */
+.dash-details-link {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: #11184d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.25s;
+}
+
+.dash-details-link:hover {
+    background: #1a2b7a;
+}
+
+/* ================================
+   EMPTY MESSAGE
+================================ */
+.no-dash-message {
+    text-align: center;
+    font-size: 18px;
+    padding: 40px;
+    color: #aaa;
+}
+
+/* ================================
+   RESPONSIVE FIX
+================================ */
+@media (max-width: 480px) {
+    .dash-item {
+        padding: 16px;
+    }
+
+    .dash-title {
+        font-size: 18px;
+    }
+
+    .dash-image-container {
+        height: 140px;
+    }
+}
+
+
+/* + tugma */
+.add-dash-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #000b3d;
+    color: #fff;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: 0.25s;
+}
+.add-dash-btn:hover {
+    background: #11184d;
+    transform: translateY(-2px);
+}
+
+/* Modal */
+.add-dash-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.add-dash-modal-content {
+    background-color: #000b3d;
+    margin: 80px auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    color: #fff;
+}
+
+.close-modal {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #ffd591;
+}
+
+/* Form inputlar */
+#dash-form input,
+#dash-form select,
+#dash-form textarea {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: none;
+}
+/* + tugma */
+.add-dash-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: #000b3d;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    transition: 0.25s;
+}
+
+.add-dash-btn:hover { background: #11184d; transform: translateY(-2px); }
+
+/* Modal */
+.add-dash-modal { display: none; position: fixed; z-index: 9998; left:0; top:0; width:100%; height:100%; overflow:auto; background-color: rgba(0,0,0,0.5);}
+.add-dash-modal-content {
+    background: #000b3d;
+    margin: 80px auto;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 500px;
+    color: #fff;
+    position: relative;
+}
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Form */
+#dash-form input, #dash-form textarea { width:100%; margin-bottom:10px; padding:8px; border-radius:6px; border:none; }
+.submit-comment-btn { padding:8px 14px; background:#222; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+.submit-comment-btn:hover { background:#333; }
+
+/* + tugma */
+.add-dash-btn {
+    position: fixed;
+    top: 20px;          /* yuqori burchak */
+    right: 20px;        /* o'ng burchak */
+    width: 60px;        /* kattaroq */
+    height: 60px;       /* kattaroq */
+    background-color: #000b3d; /* fon rangi sidebar bilan mos */
+    color: #ffd591;     /* + belgining rangi */
+    font-size: 36px;    /* + kattaligi */
+    font-weight: bold;
+    border-radius: 14px; /* biroz tortburchak */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: 0.25s;
+}
+
+.add-dash-btn:hover {
+    background-color: #11184d;
+    transform: scale(1.1);
+}

@@ -1,0 +1,26 @@
+/* + tugma */
+.add-dash-btn {
+    position: fixed;
+    top: 20px;          /* yuqori burchak */
+    right: 20px;        /* o'ng burchak */
+    width: 60px;        /* kattaroq */
+    height: 60px;       /* kattaroq */
+    background-color: #000b3d; /* fon rangi sidebar bilan mos */
+    color: #ffd591;     /* + belgining rangi */
+    font-size: 36px;    /* + kattaligi */
+    font-weight: bold;
+    border-radius: 14px; /* biroz tortburchak */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: 0.25s;
+}
+
+.add-dash-btn:hover {
+    background-color: #11184d;
+    transform: scale(1.1);
+}

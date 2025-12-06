@@ -1,0 +1,216 @@
+/* Katta konteyner */
+.dash-detail-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #020a2b;
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* ---- RASMDAN BOSHLAYMIZ ---- */
+.dash-detail-image-container {
+    flex: 0 0 42%;
+}
+
+.dash-detail-image {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* ORQAGA TUGMASI — AYNAN RASM TAGIGA */
+.back-btn {
+    margin-top: 18px;
+    display: inline-block;
+    padding: 10px 18px;
+    background: #1b1f3b;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.back-btn:hover {
+    background: #111528;
+    transform: translateX(-4px);
+}
+
+/* ---- MATN QISMI ---- */
+.dash-detail-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-detail-title {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.dash-detail-author,
+.dash_detail-author,
+.dash-detail-published {
+    color: #cbd3ff;
+    font-size: 15px;
+    margin: 3px 0;
+}
+
+/* Kontent matni */
+.dash-detail-content {
+    margin-top: 18px;
+    line-height: 1.7;
+    color: #eff1ff;
+}
+
+/* ---- Komment tugmasi ---- */
+.comment-btn {
+    margin-top: 25px;
+    padding: 10px 18px;
+    background: #1e264d;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: 0.25s;
+}
+
+.comment-btn:hover {
+    background: #333b70;
+}
+
+/* Komment formasi */
+.comment-form-container {
+    display: none;
+    background: #0b1040;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.comment-form-container.active {
+    display: block;
+}
+
+.comment-form-container input,
+.comment-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    background: #e7e7ff;
+}
+
+/* Yuborish tugmasi */
+.submit-comment-btn {
+    padding: 9px 16px;
+    background: #232855;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+.submit-comment-btn:hover {
+    background: #3a3f70;
+}
+
+/* ---- Kommentlar qismi ---- */
+.comments-section {
+    margin-top: 25px;
+}
+
+.comment-item {
+    background: #0b1040;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.comment-name {
+    color: #ffc27a;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.comment-body {
+    color: #dfe3ff;
+    margin-top: 5px;
+}
+
+.no-comments {
+    color: #bbb;
+    font-style: italic;
+}
+
+/* Pagination */
+.comments-pagination {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.comments-pagination a {
+    padding: 8px 14px;
+    background: #1b1f3b;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.comments-pagination a:hover {
+    background: #2d345c;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .dash-detail-container {
+        flex-direction: column;
+    }
+
+    .dash-detail-image-container,
+    .dash-detail-main {
+        flex: 100%;
+    }
+
+    .back-btn {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Rasm konteyneri */
+.dash-detail-image-container {
+    flex: 0 0 42%;
+    position: relative;
+}
+
+/* Orqaga tugmasi */
+.back-btn {
+    display: block;           /* blok qilib, rasm ostiga tushadi */
+    margin: 12px 0 0 0;       /* rasm va tugma orasiga bo‘sh joy */
+    padding: 8px 16px;
+    background: #1b1f3b;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: left;         /* chapga yopishtirish */
+    transition: 0.25s;
+}
+
+.back-btn:hover {
+    background: #111528;
+    transform: translateX(-3px);
+}
+
+
+.maqola-content.open {
+    max-height: none !important;
+    overflow: visible !important;
+}

@@ -1,0 +1,74 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000b3d;
+    color: #ffbd59;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    padding: 20px;
+}
+
+/* Headings */
+h1 {
+    font-family: 'Heading Now', sans-serif;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+/* Center Button */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ffbd59;
+    color: #000b3d;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ffc870;
+    transform: scale(1.05);
+}
+
+/* Burchakdagi toggle tugma */
+.corner-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #ffbd59;
+    color: #000b3d;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.corner-btn:hover {
+    background-color: #ffc870;
+    transform: scale(1.05);
+}

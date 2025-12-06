@@ -1,0 +1,176 @@
+        /* Asosiy CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+
+        /* Hamburger tugmasi */
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1001;
+            transition: left 0.3s ease;
+        }
+
+        .hamburger div {
+            height: 3px;
+            width: 100%;
+            background-color: #828282;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Sidebar konteyneri */
+        .sidebar-container {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 70px;
+            background: #000b3d;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .sidebar-container.expanded {
+            width: 250px;
+        }
+
+        /* Sidebar o'zi */
+        .sidebar {
+            padding: 80px 0 20px 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-heading {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0 20px 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-container.expanded .sidebar-heading {
+            opacity: 1;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            filter: invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .nav-text {
+            margin-left: 15px;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-container.expanded .nav-text {
+            opacity: 1;
+        }
+
+        /* Asosiy kontent */
+        .main-content {
+            flex: 1;
+            padding: 20px 20px 20px 90px;
+            transition: padding-left 0.3s ease;
+        }
+
+        .sidebar-container.expanded ~ .main-content {
+            padding-left: 270px;
+        }
+
+        /* Demo kontent */
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Responsive dizayn */
+        @media (max-width: 768px) {
+            .sidebar-container {
+                width: 0;
+            }
+
+            .sidebar-container.expanded {
+                width: 250px;
+            }
+
+            .main-content {
+                padding-left: 20px;
+            }
+
+            .sidebar-container.expanded ~ .main-content {
+                padding-left: 20px;
+            }
+
+            .hamburger {
+                left: 20px;
+            }
+        }
