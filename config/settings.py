@@ -3,11 +3,11 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = 'django-insecure-pf*2@ax0cfyc=2=077*xn_wwvop7c2f96d2_(^86kte%@yv3om'
-DEBUG = True
-ALLOWED_HOSTS = ["*"]
 
+DEBUG = False  # Render uchun
+
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,6 +21,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # 🔥 WhiteNoise statik fayllarni Render’da berishi uchun
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -34,7 +38,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # loyihaga umumiy templates papka
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -48,14 +52,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -64,25 +66,27 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Tashkent'
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# -------- STATIC FILES -------- #
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# 🔥 Render uchun majburiy
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-import os
+# -------- MEDIA -------- #
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
