@@ -54,10 +54,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'jurnal_db',
+        'USER': 'bitnet',
+        'PASSWORD': 'IMYwuq1HrK5EvG5GrFHpcXA9MAvaXekk',
+        'HOST': 'dpg-d4qgv9ili9vc739tfnc0-a.virginia-postgres.render.com',
+        'PORT': '5432',
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
